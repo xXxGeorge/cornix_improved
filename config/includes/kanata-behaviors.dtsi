@@ -1,0 +1,76 @@
+/ {
+    behaviors {
+        hm_l: homerow_left {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+            flavor = "balanced";
+            tapping-term-ms = <HM_TERM>;
+            quick-tap-ms = <HM_QUICK>;
+            require-prior-idle-ms = <HM_IDLE>;
+            hold-trigger-key-positions = <KEYS_R THUMBS>;
+            hold-trigger-on-release;
+        };
+        hm_r: homerow_right {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+            flavor = "balanced";
+            tapping-term-ms = <HM_TERM>;
+            quick-tap-ms = <HM_QUICK>;
+            require-prior-idle-ms = <HM_IDLE>;
+            hold-trigger-key-positions = <KEYS_L THUMBS>;
+            hold-trigger-on-release;
+        };
+
+        /* The combo already passed its idle gate. Do not apply it twice. */
+        hc_l: combo_hold_left {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+            flavor = "balanced";
+            tapping-term-ms = <HM_TERM>;
+            quick-tap-ms = <HM_QUICK>;
+            hold-trigger-key-positions = <KEYS_R THUMBS>;
+            hold-trigger-on-release;
+        };
+        hc_r: combo_hold_right {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&kp>, <&kp>;
+            flavor = "balanced";
+            tapping-term-ms = <HM_TERM>;
+            quick-tap-ms = <HM_QUICK>;
+            hold-trigger-key-positions = <KEYS_L THUMBS>;
+            hold-trigger-on-release;
+        };
+        nav_esc: navigation_escape {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&mo>, <&kp>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+        };
+        sym_esc: symbols_escape {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&mo>, <&kp>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+        };
+        td_num: td_num {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <150>;
+            bindings = <&tog NUM>, <&mo NUM>;
+        };
+        word: enter_caps_word {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <180>;
+            bindings = <&kp RET>, <&caps_word>;
+        };
+    };
+};
+
+&caps_word { idle-timeout-ms = <2000>; };

@@ -1,0 +1,68 @@
+/* Only explicitly listed layers participate. FN/NAV never inherit combos.
+ * First participant release ends a combo: no trailing held modifier after
+ * the chord is broken. J+L intentionally remains two independent HRMs.
+ */
+#define BASE_COMBO(name, keys, action) \
+    name { key-positions = <keys>; bindings = <action>; \
+        layers = <BASE WIN>; timeout-ms = <COMBO_TERM>; \
+        require-prior-idle-ms = <COMBO_IDLE>; };
+#define SYMBOL_COMBO(name, keys, action) \
+    name { key-positions = <keys>; bindings = <action>; \
+        layers = <SYM>; timeout-ms = <COMBO_TERM>; };
+
+/ {
+    combos {
+        compatible = "zmk,combos";
+        BASE_COMBO(bracket_left, RT1 RT2, &kp LBKT)
+        BASE_COMBO(bracket_right, RT2 RT3, &kp RBKT)
+        BASE_COMBO(backslash, LT3 LT2, &kp BSLH)
+        underscore {
+            key-positions = <LM3 LM2>;
+            bindings = <&hc_l LC(LSHFT) UNDER>;
+            layers = <BASE>;
+            timeout-ms = <COMBO_TERM>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+        underscore_windows {
+            key-positions = <LM3 LM2>;
+            bindings = <&hc_l LG(LSHFT) UNDER>;
+            layers = <WIN>;
+            timeout-ms = <COMBO_TERM>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+        quote {
+            key-positions = <RM1 RM2>;
+            bindings = <&hc_r RG(RSHFT) SQT>;
+            layers = <BASE>;
+            timeout-ms = <COMBO_TERM>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+        double_quote {
+            key-positions = <RM2 RM3>;
+            bindings = <&hc_r RC(RSHFT) DQT>;
+            layers = <BASE>;
+            timeout-ms = <COMBO_TERM>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+        quote_windows {
+            key-positions = <RM1 RM2>;
+            bindings = <&hc_r RC(RSHFT) SQT>;
+            layers = <WIN>;
+            timeout-ms = <COMBO_TERM>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+        double_quote_windows {
+            key-positions = <RM2 RM3>;
+            bindings = <&hc_r RG(RSHFT) DQT>;
+            layers = <WIN>;
+            timeout-ms = <COMBO_TERM>;
+            require-prior-idle-ms = <COMBO_IDLE>;
+        };
+        SYMBOL_COMBO(brace_left, RT1 RT2, &kp LBRC)
+        SYMBOL_COMBO(brace_right, RT2 RT3, &kp RBRC)
+        SYMBOL_COMBO(pipe, LT3 LT2, &kp PIPE)
+        SYMBOL_COMBO(number_equal, LM3 LM2, &kp EQUAL)
+        SYMBOL_COMBO(number_plus, RM1 RM2, &kp PLUS)
+        SYMBOL_COMBO(number_minus, RM2 RM3, &kp MINUS)
+    };
+};

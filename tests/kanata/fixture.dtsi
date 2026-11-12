@@ -1,0 +1,27 @@
+/* Exercise the production keymap, not a simplified copy of the HRMs.
+ * Only hardware-only bindings are removed for the native simulation.
+ */
+#include "../../config/cornix.keymap"
+#include <dt-bindings/zmk/kscan_mock.h>
+
+&kscan { rows = <5>; columns = <10>; };
+/delete-node/ &scroll_y;
+/delete-node/ &bt;
+&{/keymap/layer0} { /delete-property/ sensor-bindings; };
+&{/keymap/layer1} { /delete-property/ sensor-bindings; };
+&{/keymap/layer2} { /delete-property/ sensor-bindings; };
+&{/keymap/layer3} { /delete-property/ sensor-bindings; };
+&{/keymap/layer4} { /delete-property/ sensor-bindings; };
+&{/keymap/layer5} { /delete-property/ sensor-bindings; };
+&{/keymap/layer6} { /delete-property/ sensor-bindings; };
+&{/keymap/layer7} { /delete-property/ sensor-bindings; };
+&{/keymap/layer8} {
+    /delete-property/ sensor-bindings;
+    // Preserve real layer switching; neutralize only radio operations.
+    bindings = <
+        &none &none &none &none &none &none &none &none &none &none &none &none
+        &none &none &none &none &none &none &to BASE &to NUM &none &none &none &none
+        &none &none &none &none &none &none &kp K_MUTE &kp KP_N9 &none &to WIN &to SYM &to FN &none &none
+        &none &none &mo BT &none &none &none &none &none &none &none &none &none
+    >;
+};

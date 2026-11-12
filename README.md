@@ -10,6 +10,9 @@ ZMK board definitions and shields for the Cornix split ergonomic keyboard.
 
 **ZMK baseline:** `main` with Zephyr 4.1
 
+**Custom keymap:** [Native ZMK adaptation of the Kanata profile (中文)](docs/kanata-zmk.md),
+including HRM/combo behavior, cloud regression tests, and new-repository build instructions.
+
 ![Cornix with dongle](images/cornix_with_dongle.png)
 
 ## What is included

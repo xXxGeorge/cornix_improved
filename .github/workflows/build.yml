@@ -3,11 +3,53 @@ on:
   workflow_dispatch:
   push:
     paths:
-      - "boards/*"
-      - "config/*"
+      - "boards/**"
+      - "config/**"
+      - "zephyr/**"
+      - "build.yaml"
+      - "tests/**"
+      - "scripts/check-keymap.py"
+      - ".github/workflows/build.yml"
     tags-ignore:
       - "*"
+  pull_request:
+    paths:
+      - "boards/**"
+      - "config/**"
+      - "zephyr/**"
+      - "build.yaml"
+      - "tests/**"
+      - "scripts/check-keymap.py"
+      - ".github/workflows/build.yml"
+
+permissions:
+  contents: read
 
 jobs:
+  keymap-tests:
+    runs-on: ubuntu-latest
+    container:
+      image: zmkfirmware/zmk-build-arm:4.1
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check layout invariants
+        run: |
+          python3 scripts/check-keymap.py
+          python3 tests/kanata/generate.py
+      - name: Initialize the same manifest used for firmware
+        run: |
+          west init -l config
+          west update --fetch-opt=--filter=tree:0
+          west zephyr-export
+      - name: Run native ZMK event regression tests
+        working-directory: zmk/app
+        run: west test "$GITHUB_WORKSPACE/tests/kanata/generated"
+      - name: Save test and build logs
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: keymap-test-logs
+          path: zmk/app/build/**/*.log
   build:
+    needs: keymap-tests
     uses: zmkfirmware/zmk/.github/workflows/build-user-config.yml@main

@@ -8,3 +8,6 @@ target
 *.zip
 
 firmware
+
+# Generated native ZMK event fixtures; specifications live in generate.py.
+/tests/kanata/generated/
