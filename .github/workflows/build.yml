@@ -43,7 +43,9 @@ jobs:
           west zephyr-export
       - name: Run native ZMK event regression tests
         working-directory: zmk/app
-        run: west test "$GITHUB_WORKSPACE/tests/kanata/generated"
+        # This config-root workspace does not register ZMK's `west test`
+        # extension. Invoke the same upstream runner directly.
+        run: ./run-test.sh "$GITHUB_WORKSPACE/tests/kanata/generated"
       - name: Save test and build logs
         if: always()
         uses: actions/upload-artifact@v4

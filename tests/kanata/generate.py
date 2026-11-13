@@ -2,7 +2,8 @@
 
 Delays are AFTER each event (the mock driver also delays the first event by
 its own delay). Expected HID events are written by hand, never accepted from
-the implementation. Run with Python 3, then `west test <tests/kanata/generated>`.
+the implementation. Run with Python 3, then from zmk/app execute
+`./run-test.sh <absolute-path-to-tests/kanata/generated>`.
 """
 from pathlib import Path
 

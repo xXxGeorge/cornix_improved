@@ -121,7 +121,10 @@ no-SoftDevice 布局。不要在本次迁移时混刷其他角色的固件。
 
 `python3 scripts/check-keymap.py` 可在无 SDK 环境检查布局。
 `python3 tests/kanata/generate.py` 生成事件测试；在与固件相同 manifest 的 ZMK
-环境中运行 `west test /absolute/path/to/tests/kanata/generated`。
+环境中，先进入 `zmk/app`，再运行
+`./run-test.sh /absolute/path/to/tests/kanata/generated`。
+本仓库以 `config/west.yml` 初始化工作区，没有注册 ZMK 的 `west test`
+扩展命令；直接调用它内部使用的官方脚本，测试和失败判定保持一致。
 测试直接包含生产 keymap，只移除蓝牙操作和编码器的硬件绑定，保留实际切层入口。
 预期输出是手工指定的，测试失败不会自动接受结果。
 
