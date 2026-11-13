@@ -14,12 +14,12 @@
 | 原 Caps 位置（A 左侧，位置 12） | Escape | Navigation |
 | 左手左侧拇指（41） | Left Shift | Left Shift |
 | 左手中间拇指（42） | Escape | Symbols（数字＋符号） |
-| 左手右侧拇指（43） | 按下进入 Navigation | 松开退出 |
-| 右手左侧拇指（44） | Return | 重复 Return |
+| 左手右侧拇指（43） | F13 | Function（松开退出） |
+| 右手左侧拇指（44） | Backspace | 重复删除 |
 | 右手中间拇指（45） | Space | 重复 Space |
 | 右手右侧拇指（46） | Right Shift | Right Shift |
 | P 右侧（11） | Backspace | 重复删除 |
-| 分号右侧（23，原 Enter 位置） | F13 | F13 |
+| 分号右侧（23） | Return | 重复 Return |
 
 单键 HRM：`A=Alt`、`S=Ctrl`、`D=Shift`、`F=Cmd`；
 `J=右 Cmd`、`K=右 Shift`、`L=右 Ctrl`、`;=右 Alt`。
@@ -31,18 +31,18 @@
 
 | 层 | 内容 |
 | --- | --- |
-| Symbols | Q–P 对应 `! @ # $ % ^ & * ( )`；A–; 对应 `1…0`；Z/X/C/V/B 为 `_ - + = "`；N/M 为左右方向 |
+| Symbols | Q–P 对应 `! @ # $ % ^ & * ( )`；A–; 对应 `1…0`；Z/X/C/V/B 为 `_ - + = "`；N/M 为左右方向；位置 23 为 F13 |
 | Navigation | H/J/K/L 为方向；W/A/S/D 移动鼠标；Space 左键、I 右键；Q/E 向下/上滚动，U/O 向左/右滚动 |
-| Function | 因 Cornix 无独立数字行，把最上排 12 键映射为 F1–F12；中排 HRM 保留 |
-| Number | 恢复原独立数字小键盘层，由蓝牙层 J 进入；拇指按上述新配置，Caps 仍为 Esc／Navigation |
+| Function | 中排从左至右为 F12、F1–F11，覆盖中排 HRM 和 Caps；上排透明，combo 禁用 |
+| Number | 独立数字小键盘层，由蓝牙层 J 进入；六个拇指键与基础层一致，位置 43 为短按 F13／长按 Function；Caps 仍为 Esc／Navigation |
 | Bluetooth | 位置 38/24/12 选择蓝牙 0/1/2；H→Base、J→Number、M→Windows、逗号→Symbols、句号→Function，与原入口一致 |
 
 Windows 模式交换 S/F 与 J/L 的 Ctrl/GUI，双键长按随之调整。
-Symbols 下右手左侧拇指 Return（44）单击为 Enter，180 ms 内双击启用 Caps Word。
-Caps Word 使用原生 ZMK 规则：输入空格、Enter 等非延续键，或再次触发 Caps Word 时退出。
-字母、数字、下划线、Backspace、Delete 和修饰键不会结束它。
-原生行为没有空闲超时，因此不复刻 Kanata 的空闲 2 秒退出。
-单击 Enter 会等待 tap-dance 判定；普通层 Enter 不受此等待影响。
+Symbols 的六个拇指键均为 `&trans`，沿当前激活的下层查找绑定。
+Base、Windows 和 Number 的拇指布局一致，因此这些入口下均继承同一组功能：
+左 Shift、Esc／Symbols、F13／Function、Backspace、Space、右 Shift。
+Symbols 下右手左侧拇指（44）也直接输出 Backspace，没有 tap-dance 等待。
+旧的 Enter／Caps Word 双击入口已经移除；`word` 行为定义暂时保留，但没有键位引用。
 
 ## Combos 与防误触
 
@@ -137,7 +137,9 @@ no-SoftDevice 布局。不要在本次迁移时混刷其他角色的固件。
 
 回归用例覆盖：双键正/反序、普通打字保护、同手嵌套、JL/LJ 顺序、异手提前
 hold、双修饰键及追加 Alt、连续符号、数字层 combo、Space 滚动输入、
-导航与 Function 层的 combo 隔离，以及六个拇指键和 Caps 的新入口；共 22 个用例。
+导航与 Function 层的 combo 隔离，以及拇指 F13／Function、Backspace、中排 F 键
+和 Caps 的入口；另外验证 Number/Symbols 的六个拇指键、Function 返回原层、
+Symbols/Function 两种松键顺序，以及双击 Backspace 不触发 Caps Word，共 33 个用例。
 
 实机仍须检查：
 
@@ -145,7 +147,7 @@ hold、双修饰键及追加 Alt、连续符号、数字层 combo、Space 滚动
 - 空闲后分别轻按和长按三个 homerow combo，并与异手字母组合。
 - 任意先后松开组合键，再输入普通字母，确认没有残留修饰键。
 - 连续输入 `_ ' "`；测试双击字母后按住是否正常重复。
-- 左中拇指+数字、左手右侧拇指/Caps+方向、鼠标双速度键不同按压/释放顺序。
+- 左中拇指+数字、左手右侧拇指+F 键、Caps+方向、鼠标双速度键不同按压/释放顺序。
 
 若文字误触 combo，先把 `COMBO_TERM` 从 18 降到 15，或把 `COMBO_IDLE`
 从 150 提到 175；前者会让主动 combo 更难按准，后者会让打字后需要更久停顿。

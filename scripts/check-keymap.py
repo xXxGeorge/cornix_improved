@@ -4,6 +4,13 @@ from pathlib import Path
 import re
 
 ROOT = Path(__file__).resolve().parents[1]
+behaviors = (ROOT / "config/includes/kanata-behaviors.dtsi").read_text()
+# These declarations are direct children of /behaviors. Labels and node
+# names must both be unique; distinct labels do not permit duplicate nodes.
+declarations = re.findall(r"^\s+(\w+):\s+([\w-]+)\s*\{", behaviors, re.M)
+for column, description in [(0, "behavior label"), (1, "behavior node name")]:
+    names = [entry[column] for entry in declarations]
+    assert len(names) == len(set(names)), f"Duplicate {description}: {names}"
 keymap = (ROOT / "config/cornix.keymap").read_text()
 positions = (ROOT / "config/includes/cornix54.h").read_text()
 layout = (ROOT / "boards/jzf/cornix/cornix-layouts.dtsi").read_text()
