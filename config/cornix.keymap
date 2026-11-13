@@ -51,9 +51,9 @@
             display-name = "Base";
             bindings = <
                 &kp TAB              &kp Q                &kp W                &kp E                &kp R                &kp T                &kp Y                &kp U                &kp I                &kp O                &kp P                &kp BSPC
-                &nav_esc NAV ESC     &hm_l LALT A         &hm_l LCTRL S        &hm_l LSHFT D        &hm_l LGUI F         &kp G                &kp H                &hm_r RGUI J         &hm_r RSHFT K        &hm_r RCTRL L        &hm_r RALT SEMI      &kp F13
+                &nav_esc NAV ESC     &hm_l LALT A         &hm_l LCTRL S        &hm_l LSHFT D        &hm_l LGUI F         &kp G                &kp H                &hm_r RGUI J         &hm_r RSHFT K        &hm_r RCTRL L        &hm_r RALT SEMI      &kp RET
                 &kp LSHFT            &kp Z                &kp X                &kp C                &kp V                &kp B                &kp K_MUTE           &kp C_PP             &kp N                &kp M                &kp COMMA            &kp DOT              &kp FSLH             &kp RSHFT
-                &kp LCTRL            &td_num              &mo BT               &kp LSHFT            &sym_esc SYM ESC     &mo NAV              &kp RET              &kp SPACE            &kp RSHFT            &kp LEFT             &kp DOWN             &kp RIGHT
+                &kp LCTRL            &td_num              &mo BT               &kp LSHFT            &sym_esc SYM ESC     &func_f13 FN F13              &kp BSPC              &kp SPACE            &kp RSHFT            &kp LEFT             &kp DOWN             &kp RIGHT
             >;
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &scroll_y>;
         };
@@ -63,7 +63,7 @@
                 &none                &none                &none                &none                &none                &none                &kp LS(N2)           &kp KP_N7            &kp KP_N8            &kp KP_N9            &none                &none
                 &nav_esc NAV ESC     &kp LS(MINUS)        &kp MINUS            &kp LS(EQUAL)        &kp EQUAL            &none                &kp KP_N0            &kp KP_NUMBER_4      &kp KP_NUMBER_5      &kp KP_N6            &kp DOT              &none
                 &none                &none                &none                &none                &none                &none                &kp K_MUTE           &kp KP_NUMBER_4      &kp LS(MINUS)        &kp KP_N1            &kp KP_N2            &kp KP_N3            &none                &none
-                &none                &none                &mo BT               &kp LSHFT            &sym_esc SYM ESC     &mo NAV              &kp RET              &kp SPACE            &kp RSHFT            &none                &none                &none
+                &none                &none                &mo BT               &kp LSHFT            &sym_esc SYM ESC     &mo NAV              &kp BSPC              &kp SPACE            &kp RSHFT            &none                &none                &none
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &scroll_y>;
@@ -82,7 +82,7 @@
             display-name = "Symbols";
             bindings = <
                 &kp TILDE            &kp EXCL             &kp AT               &kp HASH             &kp DLLR             &kp PRCNT            &kp CARET            &kp AMPS             &kp ASTERISK         &kp LPAR             &kp RPAR             &trans
-                &nav_esc NAV ESC         &kp N1               &kp N2               &kp N3               &kp N4               &kp N5               &kp N6               &kp N7               &kp N8               &kp N9               &kp N0               &trans
+                &nav_esc NAV ESC         &kp N1               &kp N2               &kp N3               &kp N4               &kp N5               &kp N6               &kp N7               &kp N8               &kp N9               &kp N0               &kp F13
                 &kp GRAVE            &kp UNDER            &kp MINUS            &kp PLUS             &kp EQUAL            &kp DQT              &trans               &trans               &kp LEFT             &kp RIGHT            &trans               &trans               &trans               &trans
                 &trans               &trans               &trans               &trans               &trans               &trans               &word                &trans               &trans               &trans               &trans               &trans
             >;
@@ -91,8 +91,8 @@
         layer4 {
             display-name = "Function";
             bindings = <
-                &kp F1               &kp F2               &kp F3               &kp F4               &kp F5               &kp F6               &kp F7               &kp F8               &kp F9               &kp F10              &kp F11              &kp F12
                 &trans               &trans               &trans               &trans               &trans               &trans               &trans               &trans               &trans               &trans               &trans               &trans
+                &kp F12              &kp F1               &kp F2               &kp F3               &kp F4               &kp F5               &kp F6               &kp F7               &kp F8               &kp F9               &kp F10              &kp F11
                 &trans               &trans               &trans               &trans               &trans               &trans               &trans               &trans               &trans               &trans               &trans               &trans               &trans               &trans
                 &trans               &trans               &trans               &trans               &trans               &trans               &trans               &trans               &trans               &trans               &trans               &trans
             >;
@@ -131,10 +131,10 @@
         layer8 {
             display-name = "Bluetooth and Layers";
             bindings = <
-&none         &none  &none   &none  &none  &none                         &none     &none    &none    &none   &none  &none
-&bt BT_SEL 2  &none  &none   &none  &none  &none                         &to BASE  &to NUM  &none    &none   &none  &none
-&bt BT_SEL 1  &none  &none   &none  &none  &none  &kp K_MUTE  &kp KP_N9  &none     &to WIN  &to SYM  &to FN  &none  &none
-&bt BT_SEL 0  &none  &mo BT  &none  &none  &none                         &none     &none    &none    &none   &none  &none
+                &none         &none  &none   &none  &none  &none                         &none     &none    &none    &none   &none  &none
+                &bt BT_SEL 2  &none  &none   &none  &none  &none                         &to BASE  &to NUM  &none    &none   &none  &none
+                &bt BT_SEL 1  &none  &none   &none  &none  &none  &kp K_MUTE  &kp KP_N9  &none     &to WIN  &to SYM  &to FN  &none  &none
+                &bt BT_SEL 0  &none  &mo BT  &none  &none  &none                         &none     &none    &none    &none   &none  &none
             >;
 
             sensor-bindings = <&inc_dec_kp C_VOL_UP C_VOL_DN &scroll_y>;

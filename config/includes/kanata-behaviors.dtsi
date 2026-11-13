@@ -44,6 +44,13 @@
             hold-trigger-key-positions = <KEYS_L THUMBS>;
             hold-trigger-on-release;
         };
+        func_f13: navigation_escape {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            bindings = <&mo>, <&kp>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+        };
         nav_esc: navigation_escape {
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
