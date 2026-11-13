@@ -73,4 +73,6 @@
     };
 };
 
-&caps_word { idle-timeout-ms = <2000>; };
+/* Upstream Caps Word has no idle timeout. It exits on a non-continuation
+ * key (e.g. Space or Enter), or when toggled again.
+ */

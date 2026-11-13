@@ -38,7 +38,10 @@
 | Bluetooth | 位置 38/24/12 选择蓝牙 0/1/2；H→Base、J→Number、M→Windows、逗号→Symbols、句号→Function，与原入口一致 |
 
 Windows 模式交换 S/F 与 J/L 的 Ctrl/GUI，双键长按随之调整。
-Symbols 下右手左侧拇指 Return（44）单击为 Enter，180 ms 内双击启用 Caps Word，空闲 2 秒退出。
+Symbols 下右手左侧拇指 Return（44）单击为 Enter，180 ms 内双击启用 Caps Word。
+Caps Word 使用原生 ZMK 规则：输入空格、Enter 等非延续键，或再次触发 Caps Word 时退出。
+字母、数字、下划线、Backspace、Delete 和修饰键不会结束它。
+原生行为没有空闲超时，因此不复刻 Kanata 的空闲 2 秒退出。
 单击 Enter 会等待 tap-dance 判定；普通层 Enter 不受此等待影响。
 
 ## Combos 与防误触
