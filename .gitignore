@@ -11,3 +11,6 @@ firmware
 
 # Generated native ZMK event fixtures; specifications live in generate.py.
 /tests/kanata/generated/
+
+# Local-only keymap renderer; commit images/keymap/*.svg instead.
+/.local/keymap/
